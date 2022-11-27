@@ -1,30 +1,54 @@
 package com.andre;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
 
-  private Scanner s = new Scanner(System.in);
-  int num;
-  String login;
-  String password;
 
-  public void startMenu() {
+  private String num;
+  private String login;
+  private String password;
+  private boolean check;
+
+  public void startMenu() throws IOException {
+    Scanner s = new Scanner(System.in);
     System.out.println("***** Вітаємо Вас в КІНОТЕЦІ!!! *****\n");
     System.out.println("Оберіть варіант входу:" + "\n1. Авторизація" + "\n2. Регістрація" +
         "\n3. Переглянути список всіх фільмів" + "\n4. Вихід з програми");
-    num = s.nextInt();
+    num = s.nextLine();
     switch (num) {
-      case 1:
-        //Autorization(login, password);
+      case "1":
+        System.out.print("Введіть логін: ");
+        login = s.nextLine();
+        System.out.print("Введіть пароль: ");
+        password = s.nextLine();
+        User user = new User(login, password);
+        check = user.Authorization();
+        if (check) {
+          System.out.println("Ви успішно ввійшли в акаунт!!!");
+        } else {
+          System.out.println("Невірні дані!!!");
+        }
         break;
-      case 2:
-        //Registration(login, password);
+      case "2":
+        System.out.print("Введіть новий логін: ");
+        login = s.nextLine();
+        System.out.print("Введіть новий пароль: ");
+        password = s.nextLine();
+        User newUser = new User(login, password);
+        check = newUser.Registration();
+        if (check) {
+          System.out.println("Ви успішно зареєструвалися!!!");
+        } else {
+          System.out.println("Такий акаунт уже існує!!!");
+        }
+
         break;
-      case 3:
+      case "3":
         //List
         break;
-      case 4:
+      case "4":
         System.exit(0);
       default:
         System.out.println("Неправильний вибір!!! Спробуйте ще раз...");
