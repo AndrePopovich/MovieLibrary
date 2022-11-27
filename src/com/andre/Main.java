@@ -1,6 +1,9 @@
+package com.andre;
+
 public class Main {
 
   public static void main(String[] args) {
-    System.out.println("This is movie library");
+    UI ui = new UI();
+    ui.startMenu();
   }
 }
