@@ -1,5 +1,6 @@
 package com.andre;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,19 +11,24 @@ public class UI {
   private String login;
   private String password;
   private boolean check;
+  //private char[] securityPassword;
+  private Console console;
 
   public void startMenu() throws IOException {
     Scanner s = new Scanner(System.in);
     System.out.println("***** Вітаємо Вас в КІНОТЕЦІ!!! *****\n");
-    System.out.println("Оберіть варіант входу:" + "\n1. Авторизація" + "\n2. Регістрація" +
+    System.out.println("***** ПОЧАТКОВЕ МЕНЮ *****" + "\n1. Авторизація" + "\n2. Регістрація" +
         "\n3. Переглянути список всіх фільмів" + "\n4. Вихід з програми");
+    System.out.print("Оберіть варіант входу: ");
     num = s.nextLine();
     switch (num) {
       case "1":
+
         System.out.print("Введіть логін: ");
         login = s.nextLine();
         System.out.print("Введіть пароль: ");
-        password = s.nextLine();
+        char[] securityPassword = console.readPassword("Введіть пароль: ");
+        password = String.valueOf(securityPassword);
         User user = new User(login, password);
         check = user.Authorization();
         if (check) {
